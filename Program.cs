@@ -1,45 +1,40 @@
 ﻿using System;
+using System.Diagnostics;
+using TaylorSeries;
 
 class Program
 {
-    static double Factorial(uint num)
-    {
-        if (num <= 1)
-        {
-            return 1d;
-        }
-
-        return num * Factorial(num - 1);
-    }
-
-    static double Power(double num, int pow)
-    {
-        if (pow == 0)
-        {
-            return 1;
-        }
-
-        return num * Power(num, pow - 1);
-    }
-
-    static double Exp(double x, int n = 0, double precision = 1e-10)
-    {
-        var current = Power(x, n) / Factorial((uint)n);
-        if (current < precision)
-        {
-            return current;
-        }
-
-        return current + Exp(x, n + 1, precision);
-    }
+    static ParallelTaylor pt = new ParallelTaylor();
+    static TaylorWithRecursion tr = new TaylorWithRecursion();
+    static Taylor t = new Taylor();
 
     public static void Main()
     {
-        Console.Write("x = ");
-        var x = double.Parse(Console.ReadLine());
-        var result = Exp(x);
-        Console.WriteLine("Exp(x)      = {0}", result);
-        Console.WriteLine("Math.Exp(x) = {0}", Math.Exp(x));
-        Console.ReadKey(true);
+
+        while (true)
+        {
+            Console.Write("x = ");
+            double x = double.Parse(Console.ReadLine());
+
+            Console.Write("n = ");
+            int n = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("На скiльки потокiв роздiлити основний потiк?");
+            Console.Write("parts = ");
+            int parts = int.Parse(Console.ReadLine());
+
+            var sw = new Stopwatch();
+            sw.Start();
+            var result = pt.Exp(x, n, parts);
+            //var result = t.Exp(x, n);
+            //var result = tr.Exp(x, n);
+            sw.Stop();
+
+            //Console.WriteLine("Exp(x)      = {0}", Math.Round(result, 6));
+            //Console.WriteLine("Math.Exp(x) = {0}", Math.Exp(x));
+            Console.WriteLine("Час виконання алгоритму: " + sw.ElapsedMilliseconds + " мс.");
+            Console.ReadKey(true);
+        }
+
     }
 }

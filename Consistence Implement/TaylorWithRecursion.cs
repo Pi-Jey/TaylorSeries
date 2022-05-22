@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TaylorSeries
 {
-    internal class ConsistenceImplement
+    internal class TaylorWithRecursion
     {
-        public ConsistenceImplement()
+        public TaylorWithRecursion()
         {
 
         }
@@ -22,25 +22,25 @@ namespace TaylorSeries
             return num * Factorial(num - 1);
         }
 
-        public double Power(double num, int pow)
+        public double Power(double num, uint pow)
         {
             if (pow == 0)
             {
-                return 1;
+                return 1d;
             }
 
             return num * Power(num, pow - 1);
         }
 
-        public double Exp(double x, int n = 0, double precision = 1e-10)
+        public double Exp(double x, uint n)
         {
-            var current = Power(x, n) / Factorial((uint)n);
-            if (current < precision)
+            var current = Power(x, n) / Factorial(n);
+            if (n == 0)
             {
                 return current;
             }
-
-            return current + Exp(x, n + 1, precision);
+            
+            return current + Exp(x, n-1);
         }
 
     }
