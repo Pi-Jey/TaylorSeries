@@ -51,32 +51,44 @@ namespace TaylorSeries
 
             for (int i = 0; i < parts; i++)
             {
-                arrays[i] = new int[elementsPerPart]; 
-                for (int j = 0; j < elementsPerPart; j++)
+                arrays[i] = new int[elementsPerPart];
+                if (n % parts != 0)
                 {
-                    arrays[i][j] = i*10 + (j+1);
-                    //Console.WriteLine(arrays[i][j]);
+                    arrays[parts-1] = new int[elementsPerPart + n % parts];
                 }
+                for (int j = 0; j < arrays[i].Length; j++)
+                {
+                    if (i == 0) 
+                    {
+                        arrays[i][j] = (j + 1);
+                    }
+                    else
+                    {
+                        arrays[i][j] = arrays[i-1][elementsPerPart-1] + (j + 1);
+                    }
+                    //Console.WriteLine(arrays[i][j] );
+                }
+
                 counter++;
                 //Console.WriteLine(arrays[i]);
             }
-            //Console.WriteLine(counter);
+
             return arrays;
         }
         public double Exp(double x, int n, int parts)
         {
             int[][] arrays = Spread(n, parts);
 
-            double current = 0;
+            double current = 1;
             double power;
             double fact;
 
             Parallel.For(0, parts, i =>
             {
-                for(int j = 0; j < n/parts; j++)
+                for(int j = 0; j < arrays[i].Length; j++)
                 {
-                    power = Power(x, j*10 + i);
-                    fact = Fact(j*10 + i);
+                    power = Power(x, arrays[i][j]);
+                    fact = Fact(arrays[i][j]);
                     current += power / fact;
                 }
             });
