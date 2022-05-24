@@ -1,4 +1,8 @@
 ﻿
+
+
+using System.Numerics;
+
 namespace TaylorSeries
 {
     internal class ParallelTaylor
@@ -21,14 +25,14 @@ namespace TaylorSeries
 
             return pow;
         }
-        public double Fact(double x)
+        public double Factorial(double x)
         {
             double fact = 1;
 
             if (x == 0)
             {
                 return 1;
-            } 
+            }
             for (int i = 1; i <= x; i++)
             {
                 fact *= i;
@@ -60,24 +64,43 @@ namespace TaylorSeries
                     {
                         arrays[i][j] = arrays[i-1][elementsPerPart-1] + (j+1);
                     }
-                    //Console.WriteLine(arrays[i][j] );
                 }
-
                 counter++;
-                //Console.WriteLine(arrays[i]);
             }
 
             return arrays;
         }
-        public double Func ( double x, int n)
+        //public double Func ( double x, int n)
+        //{
+        //    double pow;
+        //    double fact;
+
+        //    pow = Power(x, n);
+        //    fact = Factorial(n);
+        //    double result = pow / fact;
+
+        //    return result;
+        //}
+        //public double Func (double x, int n)
+        //{
+        //    double pow;
+        //    double fact;
+
+        //    pow = Power(x, 2 * n + 1);
+        //    fact = Factorial(2 * n + 1);
+        //    double result = Power(-1, n) * pow / fact;
+
+        //    return result;
+        //} 
+        public double Func (double x, int n)
         {
-            double power;
-            double fact;
-
-            power = Power(x, n);
-            fact = Fact(n);
-            double result = power / fact;
-
+            double pow;
+            if (x > 1 || x < -1)
+            {
+                throw new ArgumentException("Заданий x знаходиться поза областi визначення функцiї");
+            }
+            pow = Power(x, n + 1);
+            double result = Power(-1, n) * pow / (n + 1);
             return result;
         }
         public double TaylorPar(double x, int n, int parts)

@@ -14,12 +14,12 @@ class Program
         while (true)
         {
             Console.Write("x = ");
-            double x = Convert.ToDouble(Console.ReadLine());
+            double x = double.Parse(Console.ReadLine());
 
             Console.Write("n = ");
-            int n = Convert.ToInt32(Console.ReadLine());
+            int n = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("На скiльки таскiв роздiлити основний потiк?");
+            Console.WriteLine("На скiльки потокiв роздiлити основний потiк?");
             Console.Write("parts = ");
             int parts = int.Parse(Console.ReadLine());
 
@@ -31,7 +31,9 @@ class Program
             sw.Stop();
 
             Console.WriteLine("Exp(x)      = {0}", result);
-            Console.WriteLine("Math.Exp(x) = {0}", Math.Exp(x));
+            //Console.WriteLine("Math.Exp(x) = {0}", Math.Exp(x));
+            //Console.WriteLine("Math.Exp(x) = {0}", Math.Sin(x));
+            //Console.WriteLine("Math.Exp(x) = {0}", Math.Log(x+1));
             Console.WriteLine("Час виконання алгоритму: " + sw.ElapsedMilliseconds + " мс.");
             Console.ReadKey(true);
         }

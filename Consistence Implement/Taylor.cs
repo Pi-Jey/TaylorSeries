@@ -12,6 +12,7 @@ namespace TaylorSeries
         {
 
         }
+
         public double Power(double x, long n)
         {
             double pow = 1;
@@ -19,6 +20,7 @@ namespace TaylorSeries
             {
                 return 1;
             }
+
             for (int i = 1; i <= n; i++)
             {
                 pow *= x;
@@ -26,14 +28,15 @@ namespace TaylorSeries
 
             return pow;
         }
-        public double Fact(double x)
+
+        public double Factorial(double x)
         {
             double fact = 1;
-
             if (x == 0)
             {
                 return 1;
             }
+
             for (int i = 1; i <= x; i++)
             {
                 fact *= i;
@@ -50,7 +53,7 @@ namespace TaylorSeries
             for (int i = 0; i <= n; i++)
             {
                 power = Power(x,i);
-                fact = Fact(i);
+                fact = Factorial(i);
                 current += power / fact;
             }
             return current;
