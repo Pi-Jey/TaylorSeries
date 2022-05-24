@@ -12,7 +12,7 @@ namespace TaylorSeries
 
         }
         public double Power(double x, long n)
-        {
+        {  
             double pow = 1; 
             if (n == 0)
             {
@@ -70,18 +70,18 @@ namespace TaylorSeries
 
             return arrays;
         }
-        //public double Func ( double x, int n)
-        //{
-        //    double pow;
-        //    double fact;
+        public double Func(double x, int n)
+        {
+            double pow;
+            double fact;
 
-        //    pow = Power(x, n);
-        //    fact = Factorial(n);
-        //    double result = pow / fact;
+            pow = Power(x, n);
+            fact = Factorial(n);
+            double result = pow / fact;
 
-        //    return result;
-        //}
-        //public double Func (double x, int n)
+            return result;
+        }
+        //public double Func(double x, int n)
         //{
         //    double pow;
         //    double fact;
@@ -91,18 +91,18 @@ namespace TaylorSeries
         //    double result = Power(-1, n) * pow / fact;
 
         //    return result;
-        //} 
-        public double Func (double x, int n)
-        {
-            double pow;
-            if (x > 1 || x < -1)
-            {
-                throw new ArgumentException("Заданий x знаходиться поза областi визначення функцiї");
-            }
-            pow = Power(x, n + 1);
-            double result = Power(-1, n) * pow / (n + 1);
-            return result;
-        }
+        //}
+        //public double Func(double x, int n)
+        //{
+        //    double pow;
+        //    if (x <= -1 || x >= 1)
+        //    {
+        //        throw new ArgumentException("Заданий x знаходиться поза областi визначення функцiї");
+        //    }
+        //    pow = Power(x, n + 1);
+        //    double result = Power(-1, n) * pow / (n + 1);
+        //    return result;
+        //}
         public double TaylorPar(double x, int n, int parts)
         {
             int[][] arrays = Spread(n, parts);

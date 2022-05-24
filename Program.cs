@@ -19,7 +19,7 @@ class Program
             Console.Write("n = ");
             int n = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("На скiльки потокiв роздiлити основний потiк?");
+            Console.WriteLine("На скiльки тасків роздiлити виконання задачі?");
             Console.Write("parts = ");
             int parts = int.Parse(Console.ReadLine());
 
@@ -30,10 +30,10 @@ class Program
             //var result = tr.Exp(x, n);
             sw.Stop();
 
-            Console.WriteLine("Exp(x)      = {0}", result);
+            //Console.WriteLine("Result      = {0}", result);
             //Console.WriteLine("Math.Exp(x) = {0}", Math.Exp(x));
-            //Console.WriteLine("Math.Exp(x) = {0}", Math.Sin(x));
-            //Console.WriteLine("Math.Exp(x) = {0}", Math.Log(x+1));
+            //Console.WriteLine("Math.Sin(x) = {0}", Math.Sin(x));
+            //Console.WriteLine("Math.Log(x+1) = {0}", Math.Log(x + 1));
             Console.WriteLine("Час виконання алгоритму: " + sw.ElapsedMilliseconds + " мс.");
             Console.ReadKey(true);
         }
