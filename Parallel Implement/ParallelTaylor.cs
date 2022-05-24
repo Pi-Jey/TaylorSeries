@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TaylorSeries
 {
     internal class ParallelTaylor
@@ -60,11 +54,11 @@ namespace TaylorSeries
                 {
                     if (i == 0) 
                     {
-                        arrays[i][j] = (j + 1);
+                        arrays[i][j] = (j);
                     }
                     else
                     {
-                        arrays[i][j] = arrays[i-1][elementsPerPart-1] + (j + 1);
+                        arrays[i][j] = arrays[i-1][elementsPerPart-1] + (j+1);
                     }
                     //Console.WriteLine(arrays[i][j] );
                 }
@@ -75,21 +69,28 @@ namespace TaylorSeries
 
             return arrays;
         }
-        public double Exp(double x, int n, int parts)
+        public double Func ( double x, int n)
+        {
+            double power;
+            double fact;
+
+            power = Power(x, n);
+            fact = Fact(n);
+            double result = power / fact;
+
+            return result;
+        }
+        public double TaylorPar(double x, int n, int parts)
         {
             int[][] arrays = Spread(n, parts);
 
-            double current = 1;
-            double power;
-            double fact;
+            double current = 0;
 
             Parallel.For(0, parts, i =>
             {
                 for(int j = 0; j < arrays[i].Length; j++)
                 {
-                    power = Power(x, arrays[i][j]);
-                    fact = Fact(arrays[i][j]);
-                    current += power / fact;
+                    current += Func(x, arrays[i][j]);
                 }
             });
             return current;

@@ -14,24 +14,24 @@ class Program
         while (true)
         {
             Console.Write("x = ");
-            double x = double.Parse(Console.ReadLine());
+            double x = Convert.ToDouble(Console.ReadLine());
 
             Console.Write("n = ");
-            int n = int.Parse(Console.ReadLine());
+            int n = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("На скiльки потокiв роздiлити основний потiк?");
+            Console.WriteLine("На скiльки таскiв роздiлити основний потiк?");
             Console.Write("parts = ");
             int parts = int.Parse(Console.ReadLine());
 
             var sw = new Stopwatch();
             sw.Start();
-            var result = pt.Exp(x, n, parts);
-            //var result = t.Exp(x, n);
+            var result = pt.TaylorPar(x, n, parts);
+            //double result = t.Exp(x, n);
             //var result = tr.Exp(x, n);
             sw.Stop();
 
-            //Console.WriteLine("Exp(x)      = {0}", Math.Round(result, 6));
-            //Console.WriteLine("Math.Exp(x) = {0}", Math.Exp(x));
+            Console.WriteLine("Exp(x)      = {0}", result);
+            Console.WriteLine("Math.Exp(x) = {0}", Math.Exp(x));
             Console.WriteLine("Час виконання алгоритму: " + sw.ElapsedMilliseconds + " мс.");
             Console.ReadKey(true);
         }
